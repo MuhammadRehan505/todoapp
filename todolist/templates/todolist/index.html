@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -23,7 +24,13 @@
 </head>
 
 <body>
-
+  <ul><li> Learn something new</li>
+    {% for todolist in my_data %}
+    <li> Buy a new general</li>
+    <li>{{todolist.text}}</li>
+    {% endfor %}
+    <li> Buy a dentist appoinment.</li>
+  </ul>
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
