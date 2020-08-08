@@ -13,29 +13,45 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
+  <!--<link rel="manifest" href="site.webmanifest"> -->
+  <!--<link rel="apple-touch-icon" href="icon.png"> -->
+  <!-- <Place favicon.ico in the root directory> -->
 
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
+  <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css "> -->
+  <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css"> -->
 
   <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
+  <a href="{% url 'deletecompleted' %}">
+  <button type="button" >DELETE COMPLETED</button></a>
+  <a href="{% url 'deleteall' %}">
+  <button type="button" >DELETE ALL</button></a>
+
+
+  <form action ="{% url 'add' %}" method="POST" role="form">
+      {% csrf_token %}
+      {{ hello_form.shopping_items }}  
+        <button type ="submit" id="add-btn">ADD</button>
+         
+  </form>
+
   <ul><li> Learn something new</li>
     {% for todolist in my_data %}
-    <li> Buy a new general</li>
-    <li>{{todolist.text}}</li>
-    {% endfor %}
+        {% if todolist.completed %}
+        <li>{{todolist.text}}</li>
+        {% else %}
+        <a href="{% url 'completed' todolist.id %}"><li>{{todolist.text}}</li></a>
+        {% endif %}
+        {% endfor %}
     <li> Buy a dentist appoinment.</li>
   </ul>
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+  <!-- <script src="{{ STATIC_URL }}todolist/js/vendor/modernizr-3.11.2.min.js"></script> -->
+  <!-- <script src="{{ STATIC_URL }}todolist/js/plugins.js"></script> -->
+  <!-- <script src="{{ STATIC_URL }}todolist/js/main.js"></script> -->
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
